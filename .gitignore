@@ -26,3 +26,10 @@
 *.exe
 *.out
 *.app
+f0
+
+# Temporaries
+*.swp
+
+# Flex Generated
+f0.cpp
