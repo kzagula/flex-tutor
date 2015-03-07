@@ -27,9 +27,11 @@
 *.out
 *.app
 f0
+f1
 
 # Temporaries
 *.swp
 
 # Flex Generated
 f0.cpp
+f1.cpp

@@ -13,7 +13,7 @@
 LEX=flex
 CCC=g++
 
-PROGS = f0
+PROGS = f0 f1
 
 all:
 	make $(PROGS)
@@ -23,3 +23,4 @@ clean:
 	rm -f $(PROGS) *.o *.exe a.out lex.*.c lex.*.cpp *.dot *.output *.stackdump 
 
 f0.o: f0.cpp
+f1.o: f1.cpp
