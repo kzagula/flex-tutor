@@ -27,11 +27,22 @@
 *.out
 *.app
 f0
+f0b
 f1
+fwc
+fwc2
+fwc3
 
 # Temporaries
 *.swp
+oo
+oo2
+xx
 
 # Flex Generated
 f0.cpp
+f0b.cpp
 f1.cpp
+fwc.cpp
+fwc2.cpp
+fwc3.cpp
