@@ -20,7 +20,7 @@ CCC=g++
 # List flex scanner programs to build
 #############################################################################
 
-PROGS = f0 f0b f1 fwc fwc2
+PROGS = f0 f0b f1 fwc fwc2 fwc3
 
 all:
 	make $(PROGS)
@@ -34,7 +34,11 @@ f1.cpp: f1.l
 fwc2.cpp: fwc2.l
 	$(LEX) --fast --outfile=$@ $<
 fwc2: fwc2.o
-	$(CCC) -O5 -o fwc2 fwc2.o 
+	$(CCC) -Ofast -o fwc2 fwc2.o 
+fwc3.cpp: fwc3.l
+	$(LEX) --fast --outfile=$@ $<
+fwc3: fwc3.o
+	$(CCC) -Ofast -o fwc3 fwc3.o 
 
 
 clean:
@@ -46,3 +50,4 @@ f0b.o: f0b.cpp
 f1.o: f1.cpp
 fwc.o: fwc.cpp
 fwc2.o: fwc2.cpp
+fwc3.o: fwc3.cpp

@@ -3,28 +3,22 @@
 #include <errno.h>
 #include <queue>
 
+
 enum { LN, WD, CH, SIZE };
 
-static int cf[SIZE]; // current file count
-static int ct[SIZE]; // total count
+static int cf[SIZE]; // current file counters
+static int ct[SIZE]; // total counters
 static std::queue<const char*> fnames; 
-
-%}
-
-%%
-   /*** Scanner rules ***/
-[^ \t\n\r\f\v]+   { cf[WD]++; cf[CH] += yyleng; }
-\n                { cf[LN]++; cf[CH]++; }
-.                 { cf[CH]++; }
-%%
-
-/* 
- * User code 
- */
 
 void clear_counters()
 {
    cf[LN] = cf[WD] = cf[CH] = 0;
+}
+
+void print_clear_counters(const char* fname, int c[])
+{
+   printf("%8d %8d %8d %s\n", c[LN], c[WD], c[CH], fname);
+   clear_counters();
 }
 
 void update_total()
@@ -34,14 +28,14 @@ void update_total()
    ct[CH] += cf[CH];
 }
 
-void print_clear_counters(const char* fname, int c[])
-{
-   printf("%8d %8d %8d %s\n", c[LN], c[WD], c[CH], fname);
-   clear_counters();
-}
-
 bool HaveMoreFiles() 
 {
+   if (yyin && yyin != stdin) 
+   {
+      fclose(yyin);
+      fnames.pop();
+   }
+
    while (!fnames.empty())
    {
       if ((yyin = fopen(fnames.front(), "r")))  
@@ -53,7 +47,28 @@ bool HaveMoreFiles()
    return false;
 }
 
-// Usage: fwc2 [file ...]
+%}
+
+/* 
+ * NOTE: If you use EOF rule, don't use yywrap; terminate yylex in EOF rule
+ */
+%option noyywrap 
+
+
+%%
+[^ \t\n\r\f\v]+   { cf[WD]++; cf[CH] += yyleng; }
+\n                { cf[LN]++; cf[CH]++; }
+.                 { cf[CH]++; }
+<<EOF>>           { 
+                    update_total(); 
+                    print_clear_counters(fnames.empty() ? "" : fnames.front(), cf);
+                    if (!HaveMoreFiles()) 
+                    {
+                       yyterminate();  
+                    }
+                  }
+%%
+
 
 int main (int argc, char* argv[])
 {
@@ -68,25 +83,7 @@ int main (int argc, char* argv[])
    {
       yylex();
    }
-     
+
    if (bPrintTotal)
       print_clear_counters("total", ct);
-}
-
-int yywrap (void)
-{
-   update_total();
-
-   if (yyin == stdin)
-   {
-      print_clear_counters("", cf);
-   }
-   else 
-   {
-      print_clear_counters(fnames.front(), cf);
-      fclose(yyin);
-      fnames.pop();
-   }
-
-   return HaveMoreFiles() ? 0 : 1; 
 }

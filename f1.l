@@ -1,7 +1,8 @@
 %{
    /* 
     * Code enclosed between '%{' and '%}' in the defintions section gets 
-    * included somewhere in the middle of the generated scanner file 
+    * included somewhere in the middle of the generated scanner file,
+    * before yylex() definition.
     */
 
    #include <stdio.h>
@@ -11,7 +12,8 @@
 
 %top {
     /* 
-     * The %top block will be put at the top of the generated scanner file 
+     * The %top block will be put at the top of the generated scanner file.
+     * Include stdint.h here so uint32_t type is defined.
      */
    #include <stdint.h>
 
@@ -23,7 +25,7 @@
 %%
      /* 
       * Indented lines of code at the beginning of rules section get 
-      * included at the beginning of yylex() func 
+      * included at the beginning of yylex() func. 
       */
      int yylex_code_lineno = __LINE__;
 %{
@@ -38,7 +40,7 @@
 %}
 %%
 
-// User code section goes here, included at the end of flex generated file
+// Another user code section goes here, included at the end of flex generated file
 
 int main ()
 {
