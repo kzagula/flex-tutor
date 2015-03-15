@@ -32,6 +32,7 @@ f1
 fwc
 fwc2
 fwc3
+fstr
 
 # Temporaries
 *.swp
@@ -46,3 +47,4 @@ f1.cpp
 fwc.cpp
 fwc2.cpp
 fwc3.cpp
+fstr.cpp

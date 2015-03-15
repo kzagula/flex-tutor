@@ -17,3 +17,4 @@
 - _fwc.l_ - Very simple _wc_ type of utility that works with standard input only.
 - _fwc2.l_ - More advanced _wc_ implementation. It supports multiple input files. It shows how to switch between multiple input files using ```yywrap()``` function. And shows how to use ```yyleng``` _flex_ variable (the length of ``yytext``) to update the number of characters count for word matches. 
 - _fwc3.l_ - Similar to _fwc2.l_ but it uses ```<<EOF>>``` rule instead of ``yywrap()`` function to set up input files and print counters. 
+- _fstr.l_ - Example scanner illustrating different functions that can be used to scan string instead of file input (``yy_scan_string()``, ``yy_scan_bytes()``, and ``yy_scan_buffer()``).
