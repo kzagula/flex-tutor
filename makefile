@@ -20,7 +20,7 @@ CCC=g++
 # List flex scanner programs to build
 #############################################################################
 
-PROGS = f0 f0b f1 fwc fwc2 fwc3 fstr
+PROGS = f0 f0b f1 fwc fwc2 fwc3 fstr fmulstr
 
 all:
 	make $(PROGS)
@@ -52,3 +52,4 @@ fwc.o: fwc.cpp
 fwc2.o: fwc2.cpp
 fwc3.o: fwc3.cpp
 fstr.o: fstr.cpp
+fmulstr.o: fmulstr.cpp
