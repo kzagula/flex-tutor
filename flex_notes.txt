@@ -1,0 +1,12 @@
+The minimal scanner is just a file with '%' character in it. But it requires linking with flex lib.
+To avoid that, our simplest scanner (F0.l) contains user code section and the second '%' required in such case.
+
+Any indented text or text enclosed in "%{" and "%}" in the definitions secion is copied verbatim to the output. 
+The "%{" and "%}" must appear unindented on lines by themselves.
+
+In the rules section, any indented text or text inside "%{" "%}" included before the first rule may be used 
+to declare variables which are local to the scanning routine and (after the declarations) code which is to 
+be executed whenever the scanning routine is entered. 
+
+In the definitions section (but not in the rules section), an unindented comment 
+(i.e., a line beginning with "/*") is also copied verbatim to the output up to the next "*/".

@@ -8,8 +8,8 @@
 
 std::stack< YY_BUFFER_STATE > buff_states_stack;
 
-const char* inserts[] = { "World", "Flex" };
-const char  start_text[] = "Hello <@1> <@0>!";
+const char* inserts[] = { "Flex", "World" };
+const char  start_text[] = "Hello <@0> <@1>!";
 
 
 %}

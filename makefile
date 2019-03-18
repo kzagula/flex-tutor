@@ -39,6 +39,10 @@ fwc3.cpp: fwc3.l
 	$(LEX) --fast --outfile=$@ $<
 fwc3: fwc3.o
 	$(CCC) -Ofast -o fwc3 fwc3.o 
+fwc4.cpp: fwc4.l
+	$(LEX) --fast --outfile=$@ $<
+fwc4: fwc4.o
+	$(CCC) -Ofast -o fwc4 fwc4.o 
 
 
 clean:

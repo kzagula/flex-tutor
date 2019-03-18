@@ -6,8 +6,8 @@
 
 enum { LN, WD, CH, SIZE };
 
-static int cf[SIZE]; // current file counters
-static int ct[SIZE]; // total counters
+static int cf[SIZE]; // current file counts
+static int ct[SIZE]; // total counts
 static std::queue<const char*> fnames; 
 
 void clear_counters()
